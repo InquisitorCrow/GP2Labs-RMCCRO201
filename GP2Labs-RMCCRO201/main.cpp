@@ -3,7 +3,13 @@
 // Header for SDL2 functionality
 #include <SDL.h>
 
+#include <SDL_opengl.h>
+#include <gl\GLU.h>
+
 // Global variables go here
+
+// SDL GL Context
+SDL_GLContext glcontext = NULL;
 // Pointer to our SDL Windows
 SDL_Window * window;
 
@@ -33,6 +39,18 @@ void CleanUp(){
 	SDL_Quit();
 }
 
+// Function to initialise OpenGL
+void initOpenGL()
+{
+
+}
+
+// Function to set/reset viewport
+void setViewport(int width, int height)
+{
+
+}
+
 // Main Method - Entry Point
 int main(int argc, char * arg[]) {
 	// init everything - SDL, if it is nonzero we have a problem
@@ -45,11 +63,15 @@ int main(int argc, char * arg[]) {
 	InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, false);
 
 	SDL_Event event;
-	while (SDL_PollEvent(&event)){
-		//Get event type
-		if (event.type == SDL_QUIT || event.type == SDL_WINDOWEVENT_CLOSE){
-			// set our boolean which controls the game loop to false
-			running = false;
+	while (running){
+
+	
+		while (SDL_PollEvent(&event)){
+			//Get event type
+			if (event.type == SDL_QUIT || event.type == SDL_WINDOWEVENT_CLOSE){
+				// set our boolean which controls the game loop to false
+				running = false;
+			}
 		}
 	}
 
