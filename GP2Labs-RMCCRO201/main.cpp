@@ -33,7 +33,7 @@ const int WINDOW_WIDTH = 640;
 const int WINDOW_HEIGHT = 480;
 bool running = true;
 
-// Global functions
+// Global functions	
 
 // Function to draw
 void render()
@@ -43,7 +43,7 @@ void render()
 
 	// clear the colour and depth buffer
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+			
 	//Switch to ModelView
 	glMatrixMode(GL_MODELVIEW);
 	//Reset using the Indentity Matrix
@@ -69,6 +69,8 @@ void update()
 {
 
 }
+
+
 void CleanUp(){
 	SDL_GL_DeleteContext(glcontext);
 	
@@ -79,6 +81,14 @@ void CleanUp(){
 // Function to initialise OpenGL
 void initOpenGL()
 {
+	// Create OpenGL Context
+	glcontext = SDL_GL_CreateContext(window);
+	// Something went wrong in creating the context, if it is still NULL
+	if (!glcontext)
+	{
+		std::cout << "Error Creating OpenGL Context" << SDL_GetError() << std::endl;
+	}
+	
 	// Smooth shading
 	glShadeModel(GL_SMOOTH);
 
