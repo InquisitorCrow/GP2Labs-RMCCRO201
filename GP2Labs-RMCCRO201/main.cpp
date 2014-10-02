@@ -14,6 +14,11 @@ SDL_GLContext glcontext = NULL;
 // Pointer to our SDL Windows
 SDL_Window * window;
 
+float triangleData[] = {
+	0.0f, 1.0f, 0.0f, // Top
+	-1.0f, -1.0f, 0.0f, // Bottom Left
+	1.0f, -1.0f, 0.0f }; // Bottom Right
+
 void InitWindow(int width, int height, bool fullscreen){
 	// Create a window
 	window = SDL_CreateWindow(
@@ -35,6 +40,11 @@ const int WINDOW_HEIGHT = 480;
 bool running = true;
 
 // Global functions	
+
+void initGeometry()
+{
+
+}
 
 // Function to draw
 void render()
@@ -107,6 +117,13 @@ void initOpenGL()
 
 	// Turn on best perspective correction
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+
+	GLenum err = glewInit();
+	if (GLEW_OK != err)
+	{
+		/*Problem: glewInit failed, something is seriously wrong*/
+		std::cout << "Error:" << glewGetErrorString(err) << std::endl;
+	}
 
 }
 
