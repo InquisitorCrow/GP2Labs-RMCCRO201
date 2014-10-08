@@ -17,158 +17,59 @@ SDL_GLContext glcontext = NULL;
 // Pointer to our SDL Windows
 SDL_Window * window;
 
-Vertex triangleData[] = { 
-	    //Front
-	    // Top Left
+Vertex triangleData[] = {
+	//Front
 		{-0.5f, 0.5f, 0.5f,
-		1.0f, 0.0f, 1.0f, 1.0f},
+		1.0f, 0.0f, 1.0f, 1.0f },// Top Left
+			
 		
-		// Bottom Left
 		{-0.5f,-0.5f, 0.5f,
-		1.0f, 1.0f, 0.0f, 1.0f },
+		1.0f, 1.0f, 0.0f, 1.0f },// Bottom Left
+				
 		
-		//Bottom Right
 		{ 0.5f,-0.5f, 0.5f,
-		0.0f, 1.0f, 1.0f, 1.0f },
+		0.0f, 1.0f, 1.0f, 1.0f }, //Bottom Right
+				
 		
-		// Top Right
-		{0.5f, 0.5f, 0.5f,
-		1.0f, 0.0f, 1.0f, 1.0f },
-		
-		// Top Left
-		{-0.5f, 0.5f, 0.5f,
-		1.0f, 0.0f, 1.0f, 1.0f },
-		
-		//Bottom Right
-		{ 0.5f,-0.5f, 0.5f,
-		0.0f, 1.0f, 1.0f, 1.0f }, 
-
-		
+		{ 0.5f, 0.5f, 0.5f,
+		1.0f, 0.0f, 1.0f, 1.0f },// Top Right
+				
 		//back
-		// Top Left
 		{-0.5f, 0.5f,-0.5f,
-		1.0f, 0.0f, 1.0f, 1.0f },
+		1.0f, 0.0f, 1.0f, 1.0f },// Top Left
+					
 		
-		// Bottom Left
 		{-0.5f,-0.5f,-0.5f,
-		1.0f, 1.0f, 0.0f, 1.0f },
-		
-		//Bottom Right
+		1.0f, 1.0f, 0.0f, 1.0f },// Bottom Left
+						
 		{ 0.5f,-0.5f,-0.5f,
-		0.0f, 1.0f, 1.0f, 1.0f }, 
+		0.0f, 1.0f, 1.0f, 1.0f }, //Bottom Right
+						
 		
-		// Top Right		
 		{ 0.5f, 0.5f,-0.5f,
-		1.0f, 0.0f, 1.0f, 1.0f },
-		
-		// Top Left
-		{-0.5f, 0.5f,-0.5f,
-		1.0f, 0.0f, 1.0f, 1.0f },
+		1.0f, 0.0f, 1.0f, 1.0f },// Top Right
+};
 
-		//Bottom Right
-		{ 0.5f,-0.5f,-0.5f,
-		0.0f, 1.0f, 1.0f, 1.0f },
 
-		//Top
-		// Top Left
-		{ -0.5f, 0.5f, -0.5f,
-		1.0f, 0.0f, 1.0f, 1.0f },
-
-		// Bottom Left
-		{ -0.5f, 0.5f, 0.5f,
-		1.0f, 0.0f, 1.0f, 1.0f },
-
-		//Bottom Right
-		{ 0.5f, 0.5f, 0.5f,
-		1.0f, 0.0f, 1.0f, 1.0f },
-
-		// Top Right		
-		{ 0.5f, 0.5f, -0.5f,
-		1.0f, 0.0f, 1.0f, 1.0f },
-
-		// Top Left
-		{ -0.5f, 0.5f, -0.5f,
-		1.0f, 0.0f, 1.0f, 1.0f },
-
-		//Bottom Right
-		{ 0.5f, 0.5f, 0.5f,
-		1.0f, 0.0f, 1.0f, 1.0f },
-
-		//Bottom
-		// Top Left
-		{ 0.5f, -0.5f, 0.5f,
-		1.0f, 0.0f, 1.0f, 1.0f },
-
-		// Bottom Left
-		{ 0.5f, -0.5f, -0.5f,
-		1.0f, 0.0f, 1.0f, 1.0f },
-
-		//Bottom Right
-		{ -0.5f, -0.5f, -0.5f,
-		1.0f, 0.0f, 1.0f, 1.0f },
-
-		// Top Right		
-		{ -0.5f, -0.5f, 0.5f,
-		1.0f, 0.0f, 1.0f, 1.0f },
-
-		// Top Left
-		{ 0.5f, -0.5f, 0.5f,
-		1.0f, 0.0f, 1.0f, 1.0f },
-
-		//Bottom Right
-		{ -0.5f, -0.5f, -0.5f,
-		1.0f, 0.0f, 1.0f, 1.0f },
-
-		//Left Side
-		// Top Left
-		{ -0.5f, 0.5f, -0.5f,
-		1.0f, 0.0f, 1.0f, 1.0f },
-
-		// Bottom Left
-		{ -0.5f, 0.5f, 0.5f,
-		1.0f, 0.0f, 1.0f, 1.0f },
-
-		//Bottom Right
-		{ 0.5f, 0.5f, 0.5f,
-		1.0f, 0.0f, 1.0f, 1.0f },
-
-		// Top Right		
-		{ 0.5f, 0.5f, -0.5f,
-		1.0f, 0.0f, 1.0f, 1.0f },
-
-		// Top Left
-		{ -0.5f, 0.5f, -0.5f,
-		1.0f, 0.0f, 1.0f, 1.0f },
-
-		//Bottom Right
-		{ 0.5f, 0.5f, 0.5f,
-		1.0f, 0.0f, 1.0f, 1.0f },
-
-		//Right
-		// Top Left
-		{ 0.5f, -0.5f, 0.5f,
-		1.0f, 0.0f, 1.0f, 1.0f },
-
-		// Bottom Left
-		{ 0.5f, -0.5f, -0.5f,
-		1.0f, 0.0f, 1.0f, 1.0f },
-
-		//Bottom Right
-		{ -0.5f, -0.5f, -0.5f,
-		1.0f, 0.0f, 1.0f, 1.0f },
-
-		// Top Right		
-		{ -0.5f, -0.5f, 0.5f,
-		1.0f, 0.0f, 1.0f, 1.0f },
-
-		// Top Left
-		{ 0.5f, -0.5f, 0.5f,
-		1.0f, 0.0f, 1.0f, 1.0f },
-
-		//Bottom Right
-		{ -0.5f, -0.5f, -0.5f,
-		1.0f, 0.0f, 1.0f, 1.0f },
-		
+GLuint indices[] = {
+	//front
+	0, 1, 2,
+	0, 3, 2,
+	//left
+	4, 5, 1,
+	4, 1, 0,
+	//right
+	3, 7, 2,
+	7, 6, 2,
+	//bottom
+	1, 5, 2,
+	6, 2, 1,
+	//top
+	5, 0, 7,
+	5, 7, 3,
+	//back
+	4, 5, 6,
+	4, 7, 6
 };
 
 
@@ -204,6 +105,13 @@ void initGeometry()
 	// Copy vertex data to vbo
 	glBufferData(GL_ARRAY_BUFFER, sizeof(triangleData), triangleData, GL_STATIC_DRAW);
 
+	//create buffer
+	glGenBuffers(1, &triangleEBO);
+	//Make the EBO active
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, triangleEBO);
+	//Copy Index data to the EBO
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices,GL_STATIC_DRAW);
+
 }
 
 // Function to draw
@@ -215,6 +123,9 @@ void render()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);		
 	// Make the new VBO active. Repeat here as a sanity check (may have changed since initialisation)
 	glBindBuffer(GL_ARRAY_BUFFER, triangleVBO);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, triangleEBO);
+
 	// Establish its 3 coordinates per vertex with zero stride (space between elements in array and contain floating point numbers
 	glVertexPointer(3, GL_FLOAT, sizeof(Vertex), NULL);
 	// The last parameter basically says that the colours start 3 floats into each element of the array
@@ -237,7 +148,7 @@ void render()
 	// Understand that it's X, Y and Closeness to the screen (Z)
 	glTranslatef(-1.5f, 1.5f, -6.0f);
 	// Actually draw the triangl;e giving the number of vertices provided
-	glDrawArrays(GL_TRIANGLES, 0, sizeof(triangleData) / sizeof(Vertex));
+	glDrawElements(GL_TRIANGLES,sizeof(indices) / sizeof(GLuint),GL_UNSIGNED_INT, 0);
 
 
 	// Newly added triangle
@@ -272,6 +183,7 @@ void update()
 
 
 void CleanUp(){
+	glDeleteBuffers(1, &triangleEBO);
 	glDeleteBuffers(1, &triangleVBO);
 	SDL_GL_DeleteContext(glcontext);
 	
