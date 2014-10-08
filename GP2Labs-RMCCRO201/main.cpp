@@ -7,17 +7,171 @@
 #include <SDL_opengl.h>
 #include <gl\GLU.h>
 
-// Global variables go here
 
+#include "Vertex.h"
+// Global variables go here
+GLuint triangleEBO;
+GLuint triangleVBO;
 // SDL GL Context
 SDL_GLContext glcontext = NULL;
 // Pointer to our SDL Windows
 SDL_Window * window;
 
-float triangleData[] = {
-	0.0f, 1.0f, 0.0f, // Top
-	-1.0f, -1.0f, 0.0f, // Bottom Left
-	1.0f, -1.0f, 0.0f }; // Bottom Right
+Vertex triangleData[] = { 
+	    //Front
+	    // Top Left
+		{-0.5f, 0.5f, 0.5f,
+		1.0f, 0.0f, 1.0f, 1.0f},
+		
+		// Bottom Left
+		{-0.5f,-0.5f, 0.5f,
+		1.0f, 1.0f, 0.0f, 1.0f },
+		
+		//Bottom Right
+		{ 0.5f,-0.5f, 0.5f,
+		0.0f, 1.0f, 1.0f, 1.0f },
+		
+		// Top Right
+		{0.5f, 0.5f, 0.5f,
+		1.0f, 0.0f, 1.0f, 1.0f },
+		
+		// Top Left
+		{-0.5f, 0.5f, 0.5f,
+		1.0f, 0.0f, 1.0f, 1.0f },
+		
+		//Bottom Right
+		{ 0.5f,-0.5f, 0.5f,
+		0.0f, 1.0f, 1.0f, 1.0f }, 
+
+		
+		//back
+		// Top Left
+		{-0.5f, 0.5f,-0.5f,
+		1.0f, 0.0f, 1.0f, 1.0f },
+		
+		// Bottom Left
+		{-0.5f,-0.5f,-0.5f,
+		1.0f, 1.0f, 0.0f, 1.0f },
+		
+		//Bottom Right
+		{ 0.5f,-0.5f,-0.5f,
+		0.0f, 1.0f, 1.0f, 1.0f }, 
+		
+		// Top Right		
+		{ 0.5f, 0.5f,-0.5f,
+		1.0f, 0.0f, 1.0f, 1.0f },
+		
+		// Top Left
+		{-0.5f, 0.5f,-0.5f,
+		1.0f, 0.0f, 1.0f, 1.0f },
+
+		//Bottom Right
+		{ 0.5f,-0.5f,-0.5f,
+		0.0f, 1.0f, 1.0f, 1.0f },
+
+		//Top
+		// Top Left
+		{ -0.5f, 0.5f, -0.5f,
+		1.0f, 0.0f, 1.0f, 1.0f },
+
+		// Bottom Left
+		{ -0.5f, 0.5f, 0.5f,
+		1.0f, 0.0f, 1.0f, 1.0f },
+
+		//Bottom Right
+		{ 0.5f, 0.5f, 0.5f,
+		1.0f, 0.0f, 1.0f, 1.0f },
+
+		// Top Right		
+		{ 0.5f, 0.5f, -0.5f,
+		1.0f, 0.0f, 1.0f, 1.0f },
+
+		// Top Left
+		{ -0.5f, 0.5f, -0.5f,
+		1.0f, 0.0f, 1.0f, 1.0f },
+
+		//Bottom Right
+		{ 0.5f, 0.5f, 0.5f,
+		1.0f, 0.0f, 1.0f, 1.0f },
+
+		//Bottom
+		// Top Left
+		{ 0.5f, -0.5f, 0.5f,
+		1.0f, 0.0f, 1.0f, 1.0f },
+
+		// Bottom Left
+		{ 0.5f, -0.5f, -0.5f,
+		1.0f, 0.0f, 1.0f, 1.0f },
+
+		//Bottom Right
+		{ -0.5f, -0.5f, -0.5f,
+		1.0f, 0.0f, 1.0f, 1.0f },
+
+		// Top Right		
+		{ -0.5f, -0.5f, 0.5f,
+		1.0f, 0.0f, 1.0f, 1.0f },
+
+		// Top Left
+		{ 0.5f, -0.5f, 0.5f,
+		1.0f, 0.0f, 1.0f, 1.0f },
+
+		//Bottom Right
+		{ -0.5f, -0.5f, -0.5f,
+		1.0f, 0.0f, 1.0f, 1.0f },
+
+		//Left Side
+		// Top Left
+		{ -0.5f, 0.5f, -0.5f,
+		1.0f, 0.0f, 1.0f, 1.0f },
+
+		// Bottom Left
+		{ -0.5f, 0.5f, 0.5f,
+		1.0f, 0.0f, 1.0f, 1.0f },
+
+		//Bottom Right
+		{ 0.5f, 0.5f, 0.5f,
+		1.0f, 0.0f, 1.0f, 1.0f },
+
+		// Top Right		
+		{ 0.5f, 0.5f, -0.5f,
+		1.0f, 0.0f, 1.0f, 1.0f },
+
+		// Top Left
+		{ -0.5f, 0.5f, -0.5f,
+		1.0f, 0.0f, 1.0f, 1.0f },
+
+		//Bottom Right
+		{ 0.5f, 0.5f, 0.5f,
+		1.0f, 0.0f, 1.0f, 1.0f },
+
+		//Right
+		// Top Left
+		{ 0.5f, -0.5f, 0.5f,
+		1.0f, 0.0f, 1.0f, 1.0f },
+
+		// Bottom Left
+		{ 0.5f, -0.5f, -0.5f,
+		1.0f, 0.0f, 1.0f, 1.0f },
+
+		//Bottom Right
+		{ -0.5f, -0.5f, -0.5f,
+		1.0f, 0.0f, 1.0f, 1.0f },
+
+		// Top Right		
+		{ -0.5f, -0.5f, 0.5f,
+		1.0f, 0.0f, 1.0f, 1.0f },
+
+		// Top Left
+		{ 0.5f, -0.5f, 0.5f,
+		1.0f, 0.0f, 1.0f, 1.0f },
+
+		//Bottom Right
+		{ -0.5f, -0.5f, -0.5f,
+		1.0f, 0.0f, 1.0f, 1.0f },
+		
+};
+
+
 
 void InitWindow(int width, int height, bool fullscreen){
 	// Create a window
@@ -43,6 +197,12 @@ bool running = true;
 
 void initGeometry()
 {
+	// Create buffer
+	glGenBuffers(1, &triangleVBO);
+	// Make the new VBO active
+	glBindBuffer(GL_ARRAY_BUFFER, triangleVBO);
+	// Copy vertex data to vbo
+	glBufferData(GL_ARRAY_BUFFER, sizeof(triangleData), triangleData, GL_STATIC_DRAW);
 
 }
 
@@ -51,23 +211,52 @@ void render()
 {
 	// Set the clear colour (background)
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-
 	// clear the colour and depth buffer
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			
-	//Switch to ModelView
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);		
+	// Make the new VBO active. Repeat here as a sanity check (may have changed since initialisation)
+	glBindBuffer(GL_ARRAY_BUFFER, triangleVBO);
+	// Establish its 3 coordinates per vertex with zero stride (space between elements in array and contain floating point numbers
+	glVertexPointer(3, GL_FLOAT, sizeof(Vertex), NULL);
+	// The last parameter basically says that the colours start 3 floats into each element of the array
+	glColorPointer(4, GL_FLOAT, sizeof(Vertex), (void**)(3 * sizeof(float)));
+	// Establish array contains vertices (not normals, colours, texture coords etc)
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState(GL_COLOR_ARRAY);
+	
+	
+	//Switch to Modelview
 	glMatrixMode(GL_MODELVIEW);
-	//Reset using the Indentity Matrix
+	//Reset using the identity Matrix
 	glLoadIdentity();
+	
+	
+	//           CAMERA    // LOOK AT POINT //  Up axis of the camera
+	//         X    Y    Z // X    Y     Z  // X    Y    Z
+	gluLookAt(0.0, 0.0, 0.0, 0.0, 0.0, -1.0f, 0.0, 1.0, 0.0);
+	//translate
+	// Understand that it's X, Y and Closeness to the screen (Z)
+	glTranslatef(-1.5f, 1.5f, -6.0f);
+	// Actually draw the triangl;e giving the number of vertices provided
+	glDrawArrays(GL_TRIANGLES, 0, sizeof(triangleData) / sizeof(Vertex));
+
+
+	// Newly added triangle
+	//glTranslatef(2.0f, 2.0f, -3.0f);
+	// Actually draw the triangl;e giving the number of vertices provided
+	//glDrawArrays(GL_TRIANGLES, 0, sizeof(triangleData) / (3 * sizeof(float)));
+	//Switch to ModelView
+	//glMatrixMode(GL_MODELVIEW);
+	//Reset using the Indentity Matrix
+	//glLoadIdentity();
 	//Translate to -5.0f on z-axis
-	glTranslatef(0.0f, 0.0f, -5.0f);
+	//glTranslatef(0.0f, 0.0f, -5.0f);
 	//Begin drawing triangles
-	glBegin(GL_TRIANGLES);
-	glColor3f(1.0f, 0.0f, 0.0f); //Colour of the vertices
-	glVertex3f(0.0f, 1.0f, 0.0f); // Top
-	glVertex3f(-1.0f, -1.0f, 0.0f); // Bottom Left
-	glVertex3f(1.0f, -1.0f, 0.0f); // Bottom Right
-	glEnd();
+	//glBegin(GL_TRIANGLES);
+	//glColor3f(1.0f, 0.0f, 0.0f); //Colour of the vertices
+	//glVertex3f(0.0f, 1.0f, 0.0f); // Top
+	//glVertex3f(-1.0f, -1.0f, 0.0f); // Bottom Left
+	//glVertex3f(1.0f, -1.0f, 0.0f); // Bottom Right
+	//glEnd();
 
 
 	// require to swap back and front buffer
@@ -83,6 +272,7 @@ void update()
 
 
 void CleanUp(){
+	glDeleteBuffers(1, &triangleVBO);
 	SDL_GL_DeleteContext(glcontext);
 	
 	SDL_DestroyWindow(window);
@@ -172,6 +362,7 @@ int main(int argc, char * arg[]) {
 
 	//Call our InitOpenGL Function
 	initOpenGL();
+	initGeometry();
 	//Set our viewport
 	setViewport(WINDOW_WIDTH, WINDOW_HEIGHT);
 
